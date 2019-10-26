@@ -1,27 +1,39 @@
 import React from 'react';
-import logo from '../../assets/images/logo.svg'
 import './App.css';
+import Header from '../header/header';
+import Content from '../content/content';
 
 class App extends React.Component {
 
   render() {
 
+    const activities = [
+      {
+        timestamp: new Date().getTime(),
+        text: "Ate lunch",
+        user: {
+          id: 1, name: 'Nate',
+          avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
+        },
+        comments: [{ from: 'Ari', text: 'Me too!' }]
+      },
+      {
+        timestamp: new Date().getTime(),
+        text: "Woke up early for a beautiful run",
+        user: {
+          id: 2, name: 'Ari',
+          avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
+        },
+        comments: [{ from: 'Nate', text: 'I am so jealous' }]
+      },
+    ]
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="notificationsFrame">
+        <div className="panel">
+          <Header title="Timeline" />
+          <Content activities={activities} />
+        </div>
       </div>
     );
   }
