@@ -8,11 +8,10 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       refreshing: false,
       searchText: '',
-      activities: [],
-      filtered: []
     };
   }
 
@@ -21,47 +20,7 @@ class App extends React.Component {
    * @param {string} val 
    */
   handleSearch(searchText) {
-    this.fetchData(searchText);
-  }
-
-  /**
-   * 
-   * @param {string} filter 
-   */
-  fetchData(filter = null) {
-
-    let activities = [
-      {
-        id: 1,
-        timestamp: new Date().getTime(),
-        text: "Ate lunch",
-        user: {
-          id: 1, name: 'Nate',
-          avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
-        },
-        comments: [{ from: 'Ari', text: 'Me too!' }]
-      },
-      {
-        id: 2,
-        timestamp: new Date().getTime(),
-        text: "Woke up early for a beautiful run",
-        user: {
-          id: 2, name: 'Ari',
-          avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
-        },
-        comments: [{ from: 'Nate', text: 'I am so jealous' }]
-      },
-    ];
-
-    let filtered = null;
-    if (filter) {
-      filtered = activities.filter(a => a.user && a.user.name.match(filter))
-    }
-
-    this.setState({
-      activities: activities,
-      filtered: filtered
-    }, this.onComponentRefresh);
+    this.setState({searchText: searchText}, this.refresh);
   }
 
   refresh() {
@@ -81,13 +40,11 @@ class App extends React.Component {
         <div className="panel">
           <Header
             onSearch={this.handleSearch.bind(this)}
-            title="Timeline" />
+            title="Github activity" />
 
           <Content
+            filterText={this.state.searchText}
             requestRefresh={refreshing}
-            updateData={this.fetchData.bind(this)}
-            activities={this.state.activities}
-            filtered={this.state.filtered}
             onComponentRefresh={this.onComponentRefresh.bind(this)}
           />
 

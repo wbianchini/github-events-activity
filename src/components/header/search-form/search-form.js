@@ -20,9 +20,7 @@ class SearchForm extends React.Component {
 
   updateSearchInput(e) {
     const val = e.target.value;
-    this.setState({
-      searchText: val
-    });
+    this.setState({ searchText: val });
   }
 
   submitForm(event) {

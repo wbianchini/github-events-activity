@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SearchForm from './search-form/search-form';
+import MenuButton from './menu/menu-button';
 
 class Header extends React.Component {
+
+  static propTypes = {
+    title: PropTypes.string,
+    onSearch: PropTypes.func
+  }
+  
+  static defaultProps = {
+    title: 'Github activity'
+  }
 
   constructor(props) {
     super(props);
@@ -32,11 +42,7 @@ class Header extends React.Component {
       <div className="header">
         <div className="fa fa-more"></div>
 
-        <div className="menuIcon">
-          <div className="dashTop"></div>
-          <div className="dashBottom"></div>
-          <div className="circle"></div>
-        </div>
+        <MenuButton></MenuButton>
 
         <span className="title">{title}</span>
 
@@ -48,15 +54,6 @@ class Header extends React.Component {
       </div>
     )
   }
-}
-
-Header.propTypes = {
-  title: PropTypes.string,
-  onSearch: PropTypes.func
-}
-
-Header.defaultProps = {
-  title: 'Github activity'
 }
 
 export default Header;

@@ -9,13 +9,14 @@ export class ActivityItem extends React.Component {
     return (
       <div className="item">
         <div className="avatar">
-          <img alt={activity.text} src={activity.user.avatar} />
-          {activity.user.name}
+          <img alt={activity.actor.login} src={activity.actor.avatar_url} />
         </div>
 
-        <span className="time">{activity.timestamp}</span>
-        <p>{activity.text}</p>
-        <div className="commentCount">{activity.comments.length}</div>
+        <span className="time">{activity.created_at}</span>
+
+        <p>{activity.actor.login} {activity.type}</p>
+
+        <div className="right">{activity.repo.name}</div>
 
       </div>
     )
